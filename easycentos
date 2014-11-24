@@ -8,7 +8,7 @@ echo "2. Server Static"
 echo "3. Testing Tools"
 echo "4. SELinux Tools"
 echo "5. Installer Tools"
-echo "5. Update"
+echo "6. Update"
 }
 
 option_1(){
@@ -29,6 +29,11 @@ option_4(){
 
 option_5(){
     sh Libraries/installers.sh
+}
+
+option_6(){
+    curl -sS http://johnitvn.github.io/easycentos/installer/master | sh
+    exit
 }
 
 draw_menu(){   
