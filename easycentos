@@ -1,0 +1,66 @@
+#!/bin/sh
+VERSION="1.0"
+MENU="Easy Centos > Main Menu"
+
+main_menu(){
+echo "1. Server Information"
+echo "2. Server Static"
+echo "3. Testing Tools"
+echo "4. SELinux Tools"
+echo "5. Installer Tools"
+echo "5. Update"
+}
+
+option_1(){
+    sh Libraries/server_info.sh
+}
+
+option_2(){
+    sh Libraries/server_static.sh
+}
+
+option_3(){
+    sh Libraries/test_tools.sh
+}
+
+option_4(){
+    sh Libraries/selinux_tools.sh
+}
+
+option_5(){
+    sh Libraries/installers.sh
+}
+
+draw_menu(){   
+clear
+echo "=========================================================================="
+echo "                       MowiCentos - Version ${VERSION}${NORMAL}"
+echo "=========================================================================="
+echo "${MENU}"
+echo ""
+main_menu
+echo ""
+echo "0. Exit"
+echo "=========================================================================="
+echo "Please enter a menu option."
+read opt
+}
+
+main(){
+    draw_menu
+    while [ true ]
+    do      
+        if [ $opt = "0" ]
+        then 
+            clear
+            exit
+        else      
+            function_name="option_${opt}"
+            eval ${function_name}                  
+            draw_menu
+        fi 
+        
+    done
+}
+
+main
