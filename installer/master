@@ -1,0 +1,23 @@
+#!/bin/sh
+if [[ $EUID -ne 0 ]]; then
+  echo "You must be a root user" 2>&1
+  exit 1
+else  
+  echo "Remove current version of easycentos"
+  rm -rf /root/.easycentos
+  mkdir /root/.easycentos
+  mkdir /root/.easycentos/Libraries
+  echo "Donload all files"
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/easycentos > /root/.easycentos/easycentos
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/disable_selinux > /root/.easycentos/Libraries/disable_selinux
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/enable_selinux > /root/.easycentos/Libraries/enable_selinux
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/selinux_tools.sh > /root/.easycentos/Libraries/selinux_tools.sh
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/server_info.sh > /root/.easycentos/Libraries/server_info.sh
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/server_static.sh > /root/.easycentos/Libraries/server_static.sh
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/speed_test.py > /root/.easycentos/Libraries/speed_test.py
+  curl https://raw.githubusercontent.com/johnitvn/easycentos/master/Libraries/test_tools.sh > /root/.easycentos/Libraries/test_tools.sh
+  chmod +x /root/.easycentos/*
+  chmod +x /root/.easycentos/*/*
+  echo "export PATH=$PATH:/root/.easycentos" >> /root/.profile
+  source /root/.profile
+fi
